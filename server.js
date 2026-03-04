@@ -1,20 +1,17 @@
-
 // ===============================
 // Week 6 Backend Project
 // Instructor: Sohail Ahmed
 // ===============================
-
 const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('./models/Product');
-
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/week6db')
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
@@ -57,5 +54,5 @@ app.delete('/products/:id', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
